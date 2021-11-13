@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bai1</title>
+</head>
+<body>
+	<form>
+		Nhập số
+		<input type="number" id='input_so'>
+		<br>
+		<button type="button" onclick="nhap()">Nhập</button>
+		<button type="button" onclick="in_ra()">In danh sách đã nhập</button>
+    </form>
+    <form>
+	<div id="so_chan"></div>
+    <div id="so_le"> </div>
+    <div id="tong"></div>
+    <div id="max"></div>
+    <div id="snt"></div>
+    <!-- <div id="in_so_voi_mau"></div> Em chưa biết cách tạo background cho từng số theo mã màu nên chưa làm phần này ạ -->
+    </form>
+<script type="text/javascript">
+	let mang = [];
+	function nhap(){
+		let so = parseFloat(document.getElementById('input_so').value);
+		mang.push(so);
+		document.getElementById('input_so').value = '';
+	}
+    function ktsnt(n){
+        if(n <2){
+            return -1;
+        }
+        if(n ===2){
+            return 1;
+        }
+        for(let i = 2; i<= Math.sqrt(n);i++){
+            if(n%i ==0){
+                return -1;
+            }
+        }
+        return 1;
+    }
+
+	function in_ra() {
+		let chan = '';
+        let le = '';
+        let tong = 0;
+        let maxx = mang[0];
+        let snt = '';
+        let in_voi_mau ='';
+		for(let i = 0; i < mang.length; i++){
+            if(mang[i]%2 ===0){
+                chan += mang[i] + '    ';
+            }else{
+                le += mang[i]+ '    ';
+            }
+
+            tong += mang[i];
+
+            if(mang[i] >= maxx){
+                maxx = mang[i];
+            }
+            if(ktsnt(mang[i]) ===1){
+                snt += mang[i]+ '   ';
+            }
+		}
+		document.getElementById('so_chan').innerHTML ='Số chẵn: '+ chan;
+		document.getElementById('so_le').innerHTML ='Số lẻ: '+ le;
+        document.getElementById('max').innerHTML ='Max: '+ maxx;
+        document.getElementById('tong').innerHTML ='Tổng: '+ tong;
+        document.getElementById('snt').innerHTML ='Các số nguyên tố: '+ snt;
+	}
+
+</script>
+</body>
+</html>
